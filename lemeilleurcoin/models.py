@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import RegexValidator
+from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
 
 
@@ -28,11 +28,14 @@ class Advert(models.Model):
     """
 
     # A short title for the advert
-    title = models.CharField(max_length=150)
+    title = models.CharField(max_length=150, verbose_name="Titre")
     # Description of the advertised product
-    description = models.TextField()
+    description = models.TextField(verbose_name="Description")
     # Price of the advertised product
-    price = models.IntegerField()
+    price = models.IntegerField(
+        validators=[MinValueValidator(0, "Entrer une valeur positive.")],
+        verbose_name="Prix",
+    )
     # User who posted the advert
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE
