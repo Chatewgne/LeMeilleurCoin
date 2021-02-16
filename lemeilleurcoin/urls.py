@@ -16,16 +16,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import AdvertsList, CreateAdvert
+from .views import AdvertsList, CreateAdvert, AdvertDetail
 
 urlpatterns = [
+    # Admin page :
     path("admin/", admin.site.urls),
+    # Login page :
     path(
         "login/",
         auth_views.LoginView.as_view(),
         name="login",
     ),
     # path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    # List all adverts :
     path("adverts/", AdvertsList.as_view(), name="adverts"),
+    # Create an advert :
     path("adverts/new", CreateAdvert.as_view(), name="new-advert"),
+    # See an advert in detail :
+    path("adverts/<int:pk>", AdvertDetail.as_view(), name="advert"),
 ]
