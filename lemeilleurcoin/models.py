@@ -19,3 +19,23 @@ class CustomUser(AbstractUser):
         max_length=17,
     )
     # TODO profile picture
+
+
+class Advert(models.Model):
+    """
+    Model for adverts
+    """
+
+    # A short title for the advert
+    title = models.CharField(max_length=150)
+    # Description of the advertised product
+    description = models.TextField()
+    # Price of the advertised product
+    price = models.IntegerField()
+    # User who posted the advert
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
+    # TODO image
+
+    def __str__(self):
+        return self.title
