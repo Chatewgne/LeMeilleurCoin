@@ -1,9 +1,11 @@
+<h1>Toutes les annonces</h1>
 <ul>
     <!-- Iterate over object_list -->
     {% for object in object_list %}
     <!-- Display Objects -->
     <li>{{ object.title }}</li>
-    <li>{{ object.description }}</li>
+    <li>{{ object.price }}</li>
+    <li>{{ object.user }}</li>
 
     <hr />
     <!-- If objet_list is empty  -->

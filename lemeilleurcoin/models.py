@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
@@ -33,9 +34,11 @@ class Advert(models.Model):
     # Price of the advertised product
     price = models.IntegerField()
     # User who posted the advert
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE
+    )
 
     # TODO image
 
     def __str__(self):
-        return self.title
+        return self.title + self.price
