@@ -42,6 +42,3 @@ class Advert(models.Model):
     )
 
     # TODO image
-
-    def __str__(self):
-        return self.title + self.price

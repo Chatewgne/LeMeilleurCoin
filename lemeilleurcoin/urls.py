@@ -23,7 +23,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # Login page :
     path(
-        "login/",
+        "login",
         auth_views.LoginView.as_view(),
         name="login",
     ),
