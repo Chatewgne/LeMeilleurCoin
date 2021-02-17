@@ -20,6 +20,8 @@ class CustomUserCreationForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         self.fields["username"].label = "Nom d'utilisateur"
         self.fields["phone_number"].label = "Numéro de téléphone"
+        self.fields["password1"].label = "Mot de passe"
+        self.fields["password2"].label = "Confirmation du mot de passe"
 
 
 # Extend user change form with phone number
