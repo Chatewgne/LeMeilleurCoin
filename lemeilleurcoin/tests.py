@@ -171,3 +171,32 @@ class AuthTests(TestCase):
         response = self.client.post("/accounts/login", content)
         # No redirection means authentication did not work
         self.assertEqual(response.status_code, 200)
+
+    def test_create_account_view(self):
+        """
+        Test user creation page behaviour
+        """
+
+        # Assert GET available when unauthenticated
+        response = self.client.get("/accounts/signup")
+        self.assertEquals(response.status_code, 200)
+
+        # Assert POST with correct content redirects to login
+        content = {
+            "username": "NewUser",
+            "password1": "carotte65",
+            "password2": "carotte65",
+            "phone_number": "+33624354645",
+        }
+        response = self.client.post("/accounts/signup", content)
+        self.assertRedirects(response, "/accounts/login", 302)
+
+        # Assert POST with bad content does not redirect
+        content = {
+            "username": "NewUser",
+            "password1": "carotte65",
+            "password2": "wrong",
+            "phone_number": "+33624354645",
+        }
+        response = self.client.post("/accounts/signup", content)
+        self.assertEquals(response.status_code, 200)
