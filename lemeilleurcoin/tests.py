@@ -1,5 +1,7 @@
 from django.test import TestCase
-from .models import Advert, CustomUser
+
+from .accounts.models import CustomUser
+from .adverts.models import Advert
 
 
 class MockUser:
@@ -45,7 +47,7 @@ class BasicTest(TestCase):
         """
 
         # Assert GET forbidden
-        response = self.client.get("/login")
+        response = self.client.get("/accounts/login")
         self.assertEquals(response.status_code, 200)
 
 
@@ -65,7 +67,9 @@ class AuthTests(TestCase):
 
         # Assert GET forbidden by redirect
         response = self.client.get("/adverts/new")
-        self.assertRedirects(response, "/login?next=/adverts/new", 302)
+        self.assertRedirects(
+            response, "/accounts/login?next=/adverts/new", 302
+        )
 
         # Assert POST forbidden by redirect
         content = {
@@ -74,7 +78,9 @@ class AuthTests(TestCase):
             "price": 666,
         }
         response = self.client.post("/adverts/new", content)
-        self.assertRedirects(response, "/login?next=/adverts/new", 302)
+        self.assertRedirects(
+            response, "/accounts/login?next=/adverts/new", 302
+        )
 
     def test_noauth_list_view(self):
         """
@@ -83,7 +89,7 @@ class AuthTests(TestCase):
 
         # Assert GET forbidden by redirect
         response = self.client.get("/adverts/")
-        self.assertRedirects(response, "/login?next=/adverts/", 302)
+        self.assertRedirects(response, "/accounts/login?next=/adverts/", 302)
 
     def test_auth_list_view(self):
         """
@@ -150,7 +156,7 @@ class AuthTests(TestCase):
         """
 
         content = {"username": "Elliot", "password": "P4$$w0rD"}
-        response = self.client.post("/login", content)
+        response = self.client.post("/accounts/login", content)
         # Redirection means authentication worked
         self.assertRedirects(
             response, "/adverts", status_code=302, target_status_code=301
@@ -162,6 +168,6 @@ class AuthTests(TestCase):
         """
 
         content = {"username": "Elliot", "password": "wrongP4$$w0rD"}
-        response = self.client.post("/login", content)
+        response = self.client.post("/accounts/login", content)
         # No redirection means authentication did not work
         self.assertEqual(response.status_code, 200)

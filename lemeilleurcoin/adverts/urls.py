@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import include, path
 
+from .views import AdvertDetail, AdvertsList, CreateAdvert
+
 urlpatterns = [
-    # Admin page
-    path("admin/", admin.site.urls),
-    # Accounts pages :
-    path("accounts", include("lemeilleurcoin.accounts.urls")),
-    # Advert pages :
-    path("adverts", include("lemeilleurcoin.adverts.urls")),
+    # List all adverts
+    path("/", AdvertsList.as_view(), name="adverts"),
+    # Create an advert :
+    path("/new", CreateAdvert.as_view(), name="new-advert"),
+    # See an advert in detail :
+    path("/<int:pk>", AdvertDetail.as_view(), name="advert"),
 ]
