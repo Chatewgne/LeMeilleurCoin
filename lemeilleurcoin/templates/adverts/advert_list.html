@@ -3,10 +3,13 @@
 <ul>
     <!-- Iterate over object_list -->
     {% for object in object_list %}
-    <!-- Display Objects -->
-    <li>{{ object.title }}</li>
+    <a href="{% url 'advert' object.pk %}">
+        <!-- Display Objects -->
+        <li>{{ object.title }}</li>
+    </a>
     <li>{{ object.price }}</li>
     <li>{{ object.user }}</li>
+
 
     <hr />
     <!-- If objet_list is empty  -->
