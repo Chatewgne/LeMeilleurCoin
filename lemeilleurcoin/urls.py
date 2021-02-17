@@ -21,7 +21,7 @@ urlpatterns = [
     # Admin page
     path("admin/", admin.site.urls),
     # Accounts pages :
-    path("accounts", include("lemeilleurcoin.accounts.urls")),
+    path("accounts/", include("lemeilleurcoin.accounts.urls")),
     # Advert pages :
-    path("adverts", include("lemeilleurcoin.adverts.urls")),
+    path("adverts/", include("lemeilleurcoin.adverts.urls")),
 ]

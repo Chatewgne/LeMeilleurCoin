@@ -17,12 +17,20 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 
+from .views import register
+
 urlpatterns = [
     # Login page :
     path(
-        "/login",
+        "login",
         auth_views.LoginView.as_view(),
         name="login",
+    ),
+    # Signup page :
+    path(
+        "signup",
+        register,
+        name="register",
     ),
     # path("logout/", auth_views.LogoutView.as_view(), name="logout"),
 ]

@@ -21,9 +21,9 @@ from .views import AdvertDetail, AdvertsList, CreateAdvert
 
 urlpatterns = [
     # List all adverts
-    path("/", AdvertsList.as_view(), name="adverts"),
+    path("", AdvertsList.as_view(), name="adverts"),
     # Create an advert :
-    path("/new", CreateAdvert.as_view(), name="new-advert"),
+    path("new", CreateAdvert.as_view(), name="new-advert"),
     # See an advert in detail :
-    path("/<int:pk>", AdvertDetail.as_view(), name="advert"),
+    path("<int:pk>", AdvertDetail.as_view(), name="advert"),
 ]
