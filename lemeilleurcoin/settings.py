@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
 LOGIN_REDIRECT_URL = "/adverts"
 LOGIN_URL = "/accounts/login"
+LOGOUT_REDIRECT_URL = "/accounts/login"
 AUTH_USER_MODEL = "accounts.CustomUser"
 
 MIDDLEWARE = [

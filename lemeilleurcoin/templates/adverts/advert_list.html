@@ -1,5 +1,6 @@
 <h1>Toutes les annonces</h1>
-<button><a href="/adverts/new">Poster une annonce</a></button>
+<button><a href="{% url 'new-advert' %}">Poster une annonce</a></button>
+<button><a href="{% url 'logout' %}">Me déconnecter</a></button>
 <ul>
     <!-- Iterate over object_list -->
     {% for object in object_list %}
