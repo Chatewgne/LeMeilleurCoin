@@ -2,11 +2,11 @@
 
 Démonstration technique Django : site de petites annonces
 
-(Réalisé avec Python 3.9.1, environnement local avec [Pyenv](https://realpython.com/intro-to-pyenv/)
+(Réalisé avec Python 3.9.1, environnement local avec [Pyenv](https://realpython.com/intro-to-pyenv/) 0
 
-## Lqncer l'application
+## Lancer l'application
 
-Pour lancer le serveur de développment :
+Pour lancer le serveur de développement :
 
 ```
 pip install -r requirements.txt
@@ -21,8 +21,8 @@ python manage.py runserver
 ```
 python manage.py test
 ```
-A titre indicatif test de couverture réalisé avec [coverage](https://coverage.readthedocs.io/en/coverage-5.4/) mais à prendre avec des pincettes.
-![coverqge](./coverage.png)
+A titre indicatif; un test de couverture réalisé avec [coverage](https://coverage.readthedocs.io/en/coverage-5.4/) mais à prendre avec des pincettes.
+![coveraqge](./coverage.png)
 
 ## Pistes d'améliorations
 
@@ -31,5 +31,5 @@ A titre indicatif test de couverture réalisé avec [coverage](https://coverage.
 - Enlever le reste de mélange de français/anglais car je n'ai pas surchargé la totalité des labels
 - Exhaustivité et qualité des tests toujours perfectibles
 - CSS
-- Sécurité : les mots de passes/tokens passent en clair sur le réseau tant qu'on n'implémente pas HTTPS/SSL (pas simple avec le serveur de développement mais **obligatoire** en production)
+- Sécurité : les mots de passe/tokens passent en clair sur le réseau tant qu'on n'implémente pas HTTPS/SSL (pas simple avec le serveur de développement mais **obligatoire** en production)
 - Sécurité : attention aux secrets dans les settings Django à ne pas pousser sur GitHub normalement (SECRET_KEY)
