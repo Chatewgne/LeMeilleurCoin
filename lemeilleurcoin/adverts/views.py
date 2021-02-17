@@ -21,7 +21,7 @@ class CreateAdvert(LoginRequiredMixin, CreateView):
     """
 
     model = Advert
-    fields = ["title", "description", "price"]
+    fields = ["title", "description", "price", "picture"]
 
     def form_valid(self, form):
         form.instance.user = self.request.user

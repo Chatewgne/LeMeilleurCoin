@@ -15,11 +15,13 @@ class Advert(models.Model):
     # Price of the advertised product
     price = models.IntegerField(
         validators=[MinValueValidator(0, "Entrer une valeur positive.")],
-        verbose_name="Prix",
+        verbose_name="Prix (€)",
     )
     # User who posted the advert
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE
     )
-
-    # TODO image
+    # Picture of the advertised product
+    picture = models.ImageField(
+        verbose_name="Photo", default="templates/no-image.png"
+    )

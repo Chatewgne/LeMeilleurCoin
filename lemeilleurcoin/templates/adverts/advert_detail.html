@@ -1,5 +1,8 @@
 <h3>{{ object.title }}</h3>
+<p>{{ object.price }}€</p>
+
+<p><img src="{{ object.picture.url }}" height=200 /></p>
 <p>{{ object.description }}</p>
-<p>{{ object.price }}</p>
+<p>Posté par {{ object.user.username }}</p>
 <p>Contact: {{ object.user.phone_number }}</p>
 <button><a href="{% url 'adverts' %}">Retour</a></button>
