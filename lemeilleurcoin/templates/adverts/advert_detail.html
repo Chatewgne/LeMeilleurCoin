@@ -3,6 +3,6 @@
 
 <p><img src="{{ object.picture.url }}" height=200 /></p>
 <p>{{ object.description }}</p>
-<p>Posté par {{ object.user.username }}</p>
+<p>Posté par {{ object.user.username }} le {{object.date }}</p>
 <p>Contact: {{ object.user.phone_number }}</p>
 <button><a href="{% url 'adverts' %}">Retour</a></button>

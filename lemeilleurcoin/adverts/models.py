@@ -22,6 +22,6 @@ class Advert(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE
     )
     # Picture of the advertised product
-    picture = models.ImageField(
-        verbose_name="Photo", default="templates/no-image.png"
-    )
+    picture = models.ImageField(verbose_name="Photo", default="no-image.png")
+
+    date = models.DateTimeField(auto_now=True)
