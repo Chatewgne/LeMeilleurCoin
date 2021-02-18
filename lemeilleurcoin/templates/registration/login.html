@@ -1,5 +1,9 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'mvp.css' %}">
+
 <h1>Bienvenue sur LeMeilleurCoin</h1>
 <!-- Display login form -->
+
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}

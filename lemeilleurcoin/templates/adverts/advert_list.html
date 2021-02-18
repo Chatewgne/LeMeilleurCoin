@@ -1,3 +1,5 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'mvp.css' %}">
 <h1>Toutes les annonces</h1>
 <!-- Display navigation button to new advert creation -->
 <button><a href="{% url 'new-advert' %}">Poster une annonce</a></button>
