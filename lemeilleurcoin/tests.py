@@ -1,11 +1,8 @@
+from django.contrib.auth.hashers import check_password
 from django.test import TestCase
 
 from .accounts.models import CustomUser
 from .adverts.models import Advert
-
-
-class MockUser:
-    is_authenticated = True
 
 
 class BasicTest(TestCase):
@@ -43,7 +40,7 @@ class BasicTest(TestCase):
 
     def test_login_view(self):
         """
-        Test login view available without login
+        Test login view available before authentification
         """
 
         # Assert GET forbidden
@@ -62,7 +59,7 @@ class AuthTests(TestCase):
 
     def test_noauth_create_view(self):
         """
-        Test CreateAdvert view unavailable without login
+        Test CreateAdvert view unavailable before authentification
         """
 
         # Assert GET forbidden by redirect
@@ -84,7 +81,7 @@ class AuthTests(TestCase):
 
     def test_noauth_list_view(self):
         """
-        Test AdvertList view unavailable without login
+        Test AdvertList view unavailable before authentification
         """
 
         # Assert GET forbidden by redirect
@@ -93,7 +90,7 @@ class AuthTests(TestCase):
 
     def test_auth_list_view(self):
         """
-        Test CreateAdvert view
+        Test CreateAdvert view available when authenticated
         """
 
         # Login with user
@@ -106,8 +103,9 @@ class AuthTests(TestCase):
 
     def test_auth_detail_view(self):
         """
-        Test AdvertDetail view available when logged in
+        Test AdvertDetail view available when authenticated
         """
+        # Create advert in database
         advert = Advert.objects.create(
             title="Title",
             description="Some description",
@@ -118,14 +116,14 @@ class AuthTests(TestCase):
         # Login with user
         self.client.login(username="Elliot", password="P4$$w0rD")
 
-        # Assert GET available
+        # Assert GET available on advert detail
         response = self.client.get(f"/adverts/{advert.pk}")
         self.assertEquals(response.status_code, 200)
         self.client.logout()
 
     def test_auth_create_view(self):
         """
-        Test CreateAdvert view
+        Test CreateAdvert view allows to create an advert when authenticated
         """
 
         # Login with user
@@ -157,6 +155,7 @@ class AuthTests(TestCase):
 
         content = {"username": "Elliot", "password": "P4$$w0rD"}
         response = self.client.post("/accounts/login", content)
+
         # Redirection means authentication worked
         self.assertRedirects(
             response, "/adverts", status_code=302, target_status_code=301
@@ -164,7 +163,7 @@ class AuthTests(TestCase):
 
     def test_post_bad_login_view(self):
         """
-        Test login with correct user
+        Test login with wrong username/password
         """
 
         content = {"username": "Elliot", "password": "wrongP4$$w0rD"}
@@ -172,25 +171,39 @@ class AuthTests(TestCase):
         # No redirection means authentication did not work
         self.assertEqual(response.status_code, 200)
 
-    def test_create_account_view(self):
+    def test_create_account_view_noauth(self):
         """
-        Test user creation page behaviour
+        Test user creation page available before authentication
         """
 
         # Assert GET available when unauthenticated
         response = self.client.get("/accounts/signup")
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
-        # Assert POST with correct content redirects to login
+    def test_create_account_view_ok(self):
+        """
+        Assert user creation page allows to create a user
+        """
+        # POST user content
         content = {
             "username": "NewUser",
             "password1": "carotte65",
             "password2": "carotte65",
             "phone_number": "+33624354645",
         }
+        # Assert successful POST redirects to login page
         response = self.client.post("/accounts/signup", content)
         self.assertRedirects(response, "/accounts/login", 302)
 
+        # Assert new user exists in database
+        user = CustomUser.objects.get(username="NewUser")
+        self.assertEqual(content["phone_number"], user.phone_number)
+        self.assertTrue(check_password(content["password1"], user.password))
+
+    def test_create_account_view_ko(self):
+        """
+        Assert user creation page rejects bad user content
+        """
         # Assert POST with bad content does not redirect
         content = {
             "username": "NewUser",
@@ -198,5 +211,6 @@ class AuthTests(TestCase):
             "password2": "wrong",
             "phone_number": "+33624354645",
         }
+        # No redirection means POST failed
         response = self.client.post("/accounts/signup", content)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
