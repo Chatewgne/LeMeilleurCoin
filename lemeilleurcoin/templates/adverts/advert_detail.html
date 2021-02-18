@@ -1,8 +1,9 @@
+<!-- Display advert information -->
 <h3>{{ object.title }}</h3>
 <p>{{ object.price }}€</p>
-
 <p><img src="{{ object.picture.url }}" height=200 /></p>
 <p>{{ object.description }}</p>
 <p>Posté par {{ object.user.username }} le {{object.date }}</p>
 <p>Contact: {{ object.user.phone_number }}</p>
+<!-- Display navigation button, back to advert list -->
 <button><a href="{% url 'adverts' %}">Retour</a></button>

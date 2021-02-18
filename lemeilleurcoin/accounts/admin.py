@@ -56,4 +56,5 @@ class CustomUserAdmin(UserAdmin):
     )
 
 
+# Register new form to admin page
 admin.site.register(CustomUser, CustomUserAdmin)

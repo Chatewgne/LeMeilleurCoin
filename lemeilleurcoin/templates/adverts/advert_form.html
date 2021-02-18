@@ -1,5 +1,10 @@
-<form method="post" enctype="multipart/form-data">{% csrf_token %}
+<h3>Mon annonce:</h3>
+<!-- Display advert form -->
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Valider">
+    <!-- Display cancel button, back to adverts list -->
     <button><a href="{% url 'adverts' %}">Annuler</a></button>
+    <!-- Submit advert -->
+    <input type="submit" value="Valider">
 </form>

@@ -18,4 +18,3 @@ class CustomUser(AbstractUser):
         validators=[phone_regex],
         max_length=17,
     )
-    # TODO profile picture

@@ -1,9 +1,8 @@
-# accounts/forms.py
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 
 from .models import CustomUser
 
-# Extend user creation form with phone number
+
 class CustomUserCreationForm(UserCreationForm):
     """
     Extend user creation form with phone number
@@ -24,7 +23,6 @@ class CustomUserCreationForm(UserCreationForm):
         self.fields["password2"].label = "Confirmation du mot de passe"
 
 
-# Extend user change form with phone number
 class CustomUserChangeForm(UserChangeForm):
     """
     Extend user change form with phone number

@@ -1,8 +1,10 @@
-<!-- templates/registration/login.html -->
 <h1>Bienvenue sur LeMeilleurCoin</h1>
+<!-- Display login form -->
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
+    <!-- Submit form -->
     <button type="submit">Me connecter</button>
+    <!-- Display navigation button to  account creation page -->
     <button><a href="{% url 'signup' %}">M'inscrire</a></button>
 </form>

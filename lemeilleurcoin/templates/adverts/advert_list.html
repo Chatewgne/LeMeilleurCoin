@@ -1,19 +1,22 @@
 <h1>Toutes les annonces</h1>
+<!-- Display navigation button to new advert creation -->
 <button><a href="{% url 'new-advert' %}">Poster une annonce</a></button>
+<!-- Display logout button -->
 <button><a href="{% url 'logout' %}">Me déconnecter</a></button>
 <ul>
-    <!-- Iterate over object_list -->
+    <!-- Iterate over adverts list -->
     {% for object in object_list %}
+    <!-- Display adverts-->
     <a href="{% url 'advert' object.pk %}">
-        <!-- Display Objects -->
+        <!-- Display clickable title, links to advert detail page -->
         <li>{{ object.title }}</li>
     </a>
+    <!-- Also display price and author -->
     <p>{{ object.price }}€</p>
     <p>Par {{ object.user }}</p>
 
-
     <hr />
-    <!-- If objet_list is empty  -->
+    <!-- If advert list is empty  -->
     {% empty %}
     <li>Pas d'annnonces pour l'instant.</li>
     {% endfor %}

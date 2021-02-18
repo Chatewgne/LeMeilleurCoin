@@ -17,11 +17,11 @@ class Advert(models.Model):
         validators=[MinValueValidator(0, "Entrer une valeur positive.")],
         verbose_name="Prix (€)",
     )
-    # User who posted the advert
+    # User who posted the advert (one-to-many relationship)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE
     )
     # Picture of the advertised product
     picture = models.ImageField(verbose_name="Photo", default="no-image.png")
-
+    # Creation date of the advert
     date = models.DateTimeField(auto_now=True)

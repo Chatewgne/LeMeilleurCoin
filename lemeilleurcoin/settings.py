@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # My apps :
     "lemeilleurcoin",
     "lemeilleurcoin.accounts",
     "lemeilleurcoin.adverts",
@@ -43,9 +44,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
+# Where to redirect on log in
 LOGIN_REDIRECT_URL = "/adverts"
+# Where to log in
 LOGIN_URL = "/accounts/login"
+# Where to redirect on lo gout
 LOGOUT_REDIRECT_URL = "/accounts/login"
+# Overide default user model with custom user
 AUTH_USER_MODEL = "accounts.CustomUser"
 
 MIDDLEWARE = [
@@ -66,6 +71,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
+            # Templates location
             os.path.join(PROJECT_PATH, "templates/"),
         ],
         "APP_DIRS": True,
@@ -131,5 +137,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
+
+# Pictures location
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"

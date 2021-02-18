@@ -19,7 +19,7 @@ from django.urls import path
 from .views import AdvertDetail, AdvertsList, CreateAdvert
 
 urlpatterns = [
-    # List all adverts
+    # List all adverts :
     path("", AdvertsList.as_view(), name="adverts"),
     # Create an advert :
     path("new", CreateAdvert.as_view(), name="new-advert"),
